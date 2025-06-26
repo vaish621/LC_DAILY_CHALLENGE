@@ -6,24 +6,33 @@ class Solution(object):
         :type baseStr: str
         :rtype: str
         """
+
         parent={}
+
         def find(x):
+
             if x!=parent.setdefault(x,x):
                 parent[x]=find(parent[x])
             return parent[x]
         
         def union(x,y):
             px,py=find(x),find(y)
-            print(x,px,y,py)
             if px!=py:
                 if px<py:
                     parent[py]=px
                 else:
                     parent[px]=py
+        
+        ans=[]
 
-        for a,b in zip(s1,s2):
-            union(a,b)
+        for x,y in zip(s1,s2):
+            union(x,y)
+        
+        for f in baseStr:
+            ans.append(find(f))
+        
+        return "".join(ans)
 
-        return "".join(find(c) for c in baseStr)
+                
 
         
