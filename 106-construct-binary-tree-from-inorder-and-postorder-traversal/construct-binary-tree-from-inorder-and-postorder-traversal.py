@@ -15,14 +15,14 @@ class Solution:
             
             ne=TreeNode(post[-1])
 
-            #print(ino,post)
+
 
             index=ino.index(post[-1])
-            le1=len(ino[0:index+1])
+            
 
 
-            lepost=post[0:le1-1]
-            repost=post[le1-1:len(post)-1]
+            lepost=post[0:index]
+            repost=post[index:len(post)-1]
 
             inleft=ino[0:index]
             inright=ino[index+1:]
