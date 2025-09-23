@@ -7,22 +7,26 @@
 class Solution:
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
 
+        if root is None:
+            return 0
+
         graph=defaultdict(list)
 
         def dfs(root,par):
             if root is None:
                 return
             
-            if par is not None:
-                graph[root.val].append(par.val)
+            if par:
                 graph[par.val].append(root.val)
+                graph[root.val].append(par.val)
             
             dfs(root.left,root)
             dfs(root.right,root)
         
-        q=deque()
 
         dfs(root,None)
+
+        q=deque()
 
         q.append(start)
         visit=set()
@@ -31,11 +35,9 @@ class Solution:
         time=0
 
         while q:
-            #print("e")
             for i in range(len(q)):
-                n=q.popleft()
-                #print(n)
-                for j in graph[n]:
+                t=q.popleft()
+                for j in graph[t]:
                     if j not in visit:
                         visit.add(j)
                         q.append(j)
