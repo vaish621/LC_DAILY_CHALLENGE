@@ -7,16 +7,37 @@
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
 
+        if root is None:
+            return 0
         ans=0
 
-        def rec(root):
+        def dfs(root):
             nonlocal ans
             if root is None:
                 return None
             
-            ans+=1
-            rec(root.left)
-            rec(root.right)
+            le=dfs(root.left)
+            re=dfs(root.right)
+
+
+            # if le:
+            #     print(le.val)
+            # if re:
+            #     print(re.val)
+
+            if le and re:
+                ans+=2
+            elif le and not re:
+                ans+=1
+            
+            return root
+
+
+        dfs(root)
+
+        return ans+1 if ans>0 else 1
+
         
-        rec(root)
-        return ans
+
+
+        
