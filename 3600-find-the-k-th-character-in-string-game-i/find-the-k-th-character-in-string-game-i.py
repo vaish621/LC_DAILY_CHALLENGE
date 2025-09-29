@@ -1,22 +1,18 @@
 class Solution:
-    def kthCharacter(self, k: int) -> str:
+    def kthCharacter(self, n: int) -> str:
 
-        b=['a']
-        if len(b)==k:   
-            return b[-1]
+        res=['a']
 
-        while True:
-            ans=''
-            for i in b:
-                v=ord(i)+1
-                ch=chr(v)
-                ans+=ch
-            for j in ans:
-                b.append(j)
-                if len(b)==k:   
-                    return b[-1]
+        for i in range(n-1):
+            dp=[]
+            for k in res:
+                if k=='z':
+                    dp.append("a")
+                else:
+                    dp.append(chr(ord(k)+1))
+            res.extend(dp)
+            if len(res)>=n:
+                break
         
-        # print(b)
-        # return b[-1]
-
+        return res[n-1]
         
