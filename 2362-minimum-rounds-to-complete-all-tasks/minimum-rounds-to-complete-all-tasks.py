@@ -1,27 +1,19 @@
-from collections import Counter
 class Solution:
     def minimumRounds(self, tasks: List[int]) -> int:
 
-        co=Counter(tasks)
-        ans=0
+        c=collections.Counter(tasks)
 
-        for k in co:
-            if co[k]==1:
+        s=dict(sorted(c.items(),key=lambda x:x[1],reverse=True))
+        tot=0
+
+        for i in s.values():
+            if i==1:
                 return -1
-            else:
-                if co[k]==2:
-                    ans+=1
-                else:
-                    t=co[k]//3
-                    s=co[k]-(t*3)
-                    if s==1:
-                        t-=1
-                        co[k]=co[k]-(t*3)
-                        ans+=t
-                        f=co[k]//2
-                        ans+=f
-                    else:
-                        ans+=t
-                        if s==2:
-                            ans+=1
-        return (ans)
+            tot+=i//3
+
+            if i%3!=0:
+                tot+=1
+        
+        return tot
+            
+        
