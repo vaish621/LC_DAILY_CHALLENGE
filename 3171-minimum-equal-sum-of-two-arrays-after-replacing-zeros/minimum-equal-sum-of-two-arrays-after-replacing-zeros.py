@@ -9,44 +9,9 @@ class Solution:
             if s1!=s2:
                 return -1
             return s1
-        
-        if co1==len(nums1) and co2==len(nums2):
-            return max(len(nums1),len(nums2))
-
-        def can_do(mid):
-            if s1>mid or s2>mid:
-                return False
-            
-            if co1!=0 and co2!=0:
-                if mid-s1<co1 or mid-s2<co2:
-                    return False
-                return True
-            else:
-                if co1==0:
-                    if s1!=mid:
-                        return False
-                    if mid-s2<co2:
-                        return False
-                    return True
-                else:
-                    if s2!=mid:
-                        return False
-                    if mid-s1<co1:
-                        return False
-                    return True
-           
-        l=1
-        r=max(s1,s2)*2
-        ans=-1
-
-        while l<=r:
-            mid=(l+r)//2
-            if can_do(mid):
-                ans=mid
-                r=mid-1
-            else:
-                l=mid+1
-        
-        return ans
-
-        
+        elif co1==0:
+            return s1 if s2+co2<=s1 else -1
+        elif co2==0:
+            return s2 if s1+co1<=s2 else -1
+        else:
+            return max(s1+co1,s2+co2)
