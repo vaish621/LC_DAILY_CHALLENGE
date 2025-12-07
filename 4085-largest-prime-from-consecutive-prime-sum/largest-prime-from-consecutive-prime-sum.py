@@ -10,9 +10,17 @@ class Solution:
 
         org=n
 
-        while org>0:
-            if org in primes:
-                return org
-            org-=1
+        
+        l=bisect.bisect_left(primes,org)
+        print(l)
+
+        if l==len(primes):
+            return primes[l-1]
+        
+        if primes[l]<=n:
+            return primes[l]
+        
+        if l-1>=0:
+            return primes[l-1]
         
         return 0
